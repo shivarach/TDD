@@ -27,7 +27,19 @@ public class MeasurementTest {
     public void verifyThatTheMeasurementsAreNotEqualByObject() {
         Measurement measurement1 = new Measurement(5);
         Measurement measurement2 = new Measurement(5);
-
         Assert.assertEquals(measurement1, measurement2);
     }
+
+    @Test
+    public void verifyThatTwoDifferentUnitsAreEqual() {
+        Measurement measurementInFeet = new Measurement(5);
+        measurementInFeet.setUnit("Feet");
+        Measurement measurementInInches = new Measurement(60);
+        measurementInInches.setUnit("Inch");
+        Assert.assertEquals(measurementInFeet, measurementInInches);
+
+
+    }
+
+    
 }
