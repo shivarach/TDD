@@ -2,18 +2,20 @@ import java.util.Objects;
 
 public class Measurement {
     private int value;
-    private String unit;
+    private Unit unit;
 
-    public Measurement(int value) {
+    public enum Unit { FEET, INCH }
 
+    public Measurement(int value, Unit unit) {
         this.value = value;
+        this.unit = unit;
     }
 
     public int getValue() {
         return value;
     }
 
-    public String getUnit() {
+    public Unit getUnit() {
         return unit;
     }
 
@@ -21,22 +23,23 @@ public class Measurement {
         return value == measurement2.getValue();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        int feetInInches = value;
-        if(unit != null && unit.equals("Feet")) {
-            feetInInches = feetToInches(this.value);
-        }
-
-        Measurement that = (Measurement) o;
-        if (this == o) return true;
-        if (o == null || getClass() != o.getClass()) return false;
-
-        return feetInInches == that.value;
+    public Measurement add(Measurement measurement) {
+        return new Measurement(feetToInches(this) + feetToInches(measurement), Unit.INCH);
     }
 
-    private int feetToInches(int feet) {
-        return feet * 12;
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Measurement measurement = (Measurement) o;
+        return feetToInches(this) == feetToInches(measurement);
+    }
+
+    private int feetToInches(Measurement measurement) {
+        if(measurement.unit.equals(Unit.FEET)) {
+            return 12 * measurement.getValue();
+        }
+        return measurement.getValue();
     }
 
     @Override
@@ -45,7 +48,4 @@ public class Measurement {
         return Objects.hash(value);
     }
 
-    public void setUnit(String unit) {
-        this.unit = unit;
-    }
 }
