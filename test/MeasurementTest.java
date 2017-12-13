@@ -8,9 +8,7 @@ public class MeasurementTest {
         Measurement measurement1 = new Measurement(5, Measurement.Unit.INCH);
         Measurement measurement2 = new Measurement(5, Measurement.Unit.INCH);
 
-        boolean result = measurement1.isEqualTo(measurement2);
-
-        Assert.assertEquals(result, true);
+        Assert.assertEquals(measurement1, measurement2);
     }
 
     @Test
@@ -18,9 +16,7 @@ public class MeasurementTest {
         Measurement measurement1 = new Measurement(5, Measurement.Unit.INCH);
         Measurement measurement2 = new Measurement(15, Measurement.Unit.INCH);
 
-        boolean result = measurement1.isEqualTo(measurement2);
-
-        Assert.assertNotEquals(result, true);
+        Assert.assertNotEquals(measurement1, measurement2);
     }
 
     @Test

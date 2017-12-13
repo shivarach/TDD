@@ -19,10 +19,6 @@ public class Measurement {
         return unit;
     }
 
-    public boolean isEqualTo(Measurement measurement2) {
-        return value == measurement2.getValue();
-    }
-
     public Measurement add(Measurement measurement) {
         return new Measurement(feetToInches(this) + feetToInches(measurement), Unit.INCH);
     }
